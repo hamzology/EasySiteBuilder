@@ -1,0 +1,17 @@
+<IfModule mod_headers.c>
+    Header set OUR-Server "CB"
+    Header set Access-Control-Allow-Origin "https://filesjar.serverlin.com"
+</IfModule>
+# Uncomment following lines if Apache doesnt support MultiViews!
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+	
+    RewriteCond %{QUERY_STRING} "fbclid=" [NC]
+    RewriteRule (.*) https://filesjar.serverlin.com/$1? [R=301,L]
+
+    RewriteCond %{HTTP_HOST} ^filesjar.serverlin.com [NC]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule .* index.php [L,QSA]
+	
+</IfModule>
